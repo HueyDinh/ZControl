@@ -1,0 +1,6 @@
+{
+    "sketch": "MEM458_Lab2A_PWM.ino",
+    "board": "arduino:avr:uno",
+    "port": "COM4",
+    "programmer": "arduino:avrispmkii"
+}
