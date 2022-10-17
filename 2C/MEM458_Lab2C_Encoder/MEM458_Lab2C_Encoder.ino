@@ -34,8 +34,8 @@ volatile long lastcountA = 0;
 unsigned long lastInrptTimeA = 0;
 volatile unsigned long InrptTimeA = 0;
 
-int duty = 153;  //duty cycle 153/255 = 60%
-float velocity = 0;
+int duty;  //duty cycle 153/255 = 60%
+float velocity;
 /*************************************************
            Interrupt Service Routine A
 **************************************************/
@@ -79,7 +79,7 @@ void loop() {
   while(yes)
 {
 // Generate PWM on pinX to control motor speed
-  duty = 153; //60% duty cycle
+  duty = 167; //60% duty cycle
   analogWrite(pinX, duty);
 
 // Serial print interrupt times and encoder counts
