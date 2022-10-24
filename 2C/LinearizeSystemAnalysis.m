@@ -6,8 +6,8 @@ A = fscanf(fileID,formatSpec,sizeA);
 fclose(fileID);
 n=size(A);
 t=A(1,1:n(2))*0.001;
-x=A(2,1:n(2))*0.892;
-v=A(3,1:n(2))*1000*0.892;
+x=A(2,1:n(2))*0.892*pi/180;
+v=A(3,1:n(2))*1000*0.892*pi/180;
 v_old = v;
 v(2)=(v(1)+v(2))/2;
 v(3)=(v(2)*2+v(3))/3;
@@ -22,12 +22,21 @@ for i=10:1:n(2)
     v(i)=(v(i-1)*9+v(i))/10;
 end
 
-vel_equil = -0.3268*0.892*1000;
-input_perturbation = 25/255*100;
+vel_equil = -0.31266*0.892*1000*pi/180;
+input_perturbation = 25/255*100*pi/180;
 
 v_perturbation = v-(vel_equil);
 
-figure;
-plot(t,v_perturbation,'r-')
+delay = 3;
+A = -0.62;
+tau = 0.11;
+curve_fit_eqn = @(t) A*(1-exp(-(t-delay)/tau)).*heaviside(t-delay);
 
-log_fit = 
+figure;
+plot(t,v_perturbation,'r-',"DisplayName","Arduino's Perturbation Output"); hold on;
+plot(t,curve_fit_eqn(t),'b-',"LineWidth",2,"DisplayName",sprintf("Curve Fit line: \\omega = %.3f exp(-t/%.3f)",A, tau));
+xlabel("Time (s)");
+ylabel("Angular Velocity (rad/s)");
+grid on;
+grid minor;
+legend(location = "best");

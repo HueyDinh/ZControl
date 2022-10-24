@@ -58,6 +58,9 @@ void setup() {
   Serial.begin(115200);
   // Set up pinX to provide PWM output to move the motor
   pinMode(pinX, OUTPUT);
+  // Generate PWM on pinX to control motor speed
+  duty = 142; //60% duty cycle
+  analogWrite(pinX, duty);
   //pinMode(pinY, OUTPUT);
   // Set up pinA and pinB to read the A, B pulses from the encoder
   pinMode(pinA, INPUT_PULLUP);
@@ -65,7 +68,7 @@ void setup() {
 
   // Attach the interrupt service routines
   attachInterrupt(digitalPinToInterrupt(pinA),isrA,RISING);
-
+ 
   Serial.println("Start");
 }
 
@@ -78,10 +81,6 @@ void loop() {
   
   while(yes)
 {
-// Generate PWM on pinX to control motor speed
-  duty = 167; //60% duty cycle
-  analogWrite(pinX, duty);
-
 // Serial print interrupt times and encoder counts
 
 if( countA != lastcountA ) {   
@@ -94,10 +93,16 @@ if( countA != lastcountA ) {
   lastcountA = countA;
   lastInrptTimeA = InrptTimeA;
 }
-   if (InrptTimeA >= 10000) {   
-      yes=0;
-      duty = 0;
-      analogWrite(pinX, duty);
+
+//if (InrptTimeA >= 3000) {
+//  duty = 167;
+//	analogWrite(pinX, duty);
+//}
+
+if (InrptTimeA >= 10000) {   
+  yes=0;
+  duty = 0;
+  analogWrite(pinX, duty);
   }
 }
 noInterrupts();
