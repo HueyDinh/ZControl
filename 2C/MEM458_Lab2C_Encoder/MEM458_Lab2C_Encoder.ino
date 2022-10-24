@@ -94,10 +94,10 @@ if( countA != lastcountA ) {
   lastInrptTimeA = InrptTimeA;
 }
 
-//if (InrptTimeA >= 3000) {
-//  duty = 167;
-//	analogWrite(pinX, duty);
-//}
+if (InrptTimeA >= 3000) {
+  duty = 167;
+	analogWrite(pinX, duty);
+}
 
 if (InrptTimeA >= 10000) {   
   yes=0;

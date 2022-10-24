@@ -1,3 +1,4 @@
+clc; clear; close all;
 % ReadTxt_MEM458_Lab2C_CCW_smooth.m
 fileID = fopen('file_MEM458_Lab2C_CCW.txt','r');
 formatSpec = '%d %d %f';
@@ -7,7 +8,7 @@ fclose(fileID);
 n=size(A);
 t=A(1,1:n(2))*0.001;
 x=A(2,1:n(2))*0.0161;
-v=A(3,1:n(2))*16.1;
+v=A(3,1:n(2))*0.892*1000*pi/180;
 v_old = v;
 v(2)=(v(1)+v(2))/2;
 v(3)=(v(2)*2+v(3))/3;
@@ -47,7 +48,7 @@ grid minor;
 hold on;
 
 t2=linspace(0,0.39,100);
-v2=-4.988*(1-exp(-t2/0.08));
+v2=-0.62*8.1*(1-exp(-t2/0.075));
 figure(510)
 plot(t2,v2,'b-')
 grid on;

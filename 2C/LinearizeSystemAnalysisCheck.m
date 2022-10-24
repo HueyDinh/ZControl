@@ -1,5 +1,5 @@
 % ReadTxt_MEM458_Lab2C_CCW_smooth.m
-fileID = fopen("linearize_perturbation.txt",'r');
+fileID = fopen("linearize_perturbation2.txt",'r');
 formatSpec = '%d %d %f';
 sizeA = [3 Inf];
 A = fscanf(fileID,formatSpec,sizeA);
