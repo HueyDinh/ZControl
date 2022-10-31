@@ -17,13 +17,13 @@ MEM458 Lab3, Drexel University 10/22/2020
               INITIALIZATION
 **********************************************/
 // Use pinIN1 & pinIN2 as PWM outputs to control the motion of the motor
-const int pinIN1 = 9;  // for PWM output to IN1 of L298N
-const int pinIN2 = 10;  // for PWM output to IN2 of L298N
+const int pinIN1 = 5;  // for PWM output to IN1 of L298N
+const int pinIN2 = 6;  // for PWM output to IN2 of L298N
 
 // Use pinA as the interrupt pin dictated by Encoder Channel A
-const int pinA = 2;  // Yellow wire(Channel A) 
+const int pinA = PIN2;  // Yellow wire(Channel A) 
 // Use pinB as the interrupt pin dictated by Encoder Channel B
-const int pinB = 3;  // White wire (Channel B) 
+const int pinB = PIN3;  // White wire (Channel B) 
 
 // Variables to record the number of interrupts
 volatile long counter = 0;
@@ -81,6 +81,7 @@ void loop() {
 
   while(yes)
 {
+  Serial.println(digitalRead(pinB));
 // Generate PWM on pinX to control motor speed
   if (InrptTime <= 1000) {     //CCW rotation for 1 second
     duty1 = 90;
