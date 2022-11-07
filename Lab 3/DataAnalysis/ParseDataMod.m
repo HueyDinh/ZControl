@@ -1,5 +1,6 @@
+clc;clear;close all;
 % ReadTxt_MEM458_Lab3_Motor_Velocity.m
-fileID = fopen('file_MEM458_Lab3_Motor_Velocity.txt','r');
+fileID = fopen('lab4modData.txt','r');
 formatSpec = '%d %d %f';
 sizeA = [3 Inf];
 A = fscanf(fileID,formatSpec,sizeA);
@@ -25,22 +26,32 @@ end
 figure(501)
 plot(t/1000,x,'r-')
 title('counts(red) vs. time, sec')
+xlabel("Time (s)")
+ylabel("Encoder Count");
 grid on;
 grid minor;
+
 figure(502)
 plot(t(1:100)/1000,x(1:100),'r-')
-title('counts(red) vs. time, sec')
+title('counts(red) vs. time, sec - Zoomed')
+xlabel("Time (s)")
+ylabel("Encoder Count");
 grid on;
 grid minor;
+
 figure(503)
 plot(t/1000,v_old,'b-')
 title('counts/time(blue) vs. time, sec')
+xlabel("Time (s)")
+ylabel("Encoder Count Rate of Change (s^{-1})");
 grid on;
 grid minor;
 
 figure(510)
 plot(t/1000,v,'m-')
-title('counts/time(purple) vs. time, sec')
+title('counts/time(purple) vs. time, sec - Post-Processed')
+xlabel("Time (s)")
+ylabel("Encoder Count Rate of Change (s^{-1})");
 grid on;
 grid minor;
 

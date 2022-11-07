@@ -21,9 +21,9 @@ const int pinIN1 = 5;  // for PWM output to IN1 of L298N
 const int pinIN2 = 6;  // for PWM output to IN2 of L298N
 
 // Use pinA as the interrupt pin dictated by Encoder Channel A
-const int pinA = PIN2;  // Yellow wire(Channel A) 
+const int pinA = 2;  // Yellow wire(Channel A) 
 // Use pinB as the interrupt pin dictated by Encoder Channel B
-const int pinB = PIN3;  // White wire (Channel B) 
+const int pinB = 3;  // White wire (Channel B) 
 
 // Variables to record the number of interrupts
 volatile long counter = 0;
@@ -81,17 +81,13 @@ void loop() {
 
   while(yes)
 {
-  Serial.println(digitalRead(pinB));
 // Generate PWM on pinX to control motor speed
-  if (InrptTime <= 1000) {     //CCW rotation for 1 second
-    duty1 = 90;
-    duty2 = 50;
-  } else if (InrptTime <= 2500){   //CW rotation for 1.5 seconds
-  duty1 = 10; 
-  duty2 = 50;
-  } else {       // CCW rotation for the last 1.5 seconds
-    duty1 = 90;
-    duty2 = 50;
+  if (InrptTime <= 3000) {     //CCW rotation for 3 second
+    duty1 = 63;
+    duty2 = 37;
+  } else {   //CW rotation for 4 seconds
+    duty1 = 31;
+    duty2 = 69;
   }
        duty1=map(duty1,0,100,0,255);
        duty2=map(duty2,0,100,0,255);
@@ -112,7 +108,7 @@ void loop() {
   }
   
 // Terminate the loop and stop motor motion after four seconds
-   if (InrptTime >= 4000) {   
+   if (InrptTime >= 7000) {   
       yes=0;    // to stop the loop
        duty1 = 50;   // to stop the motor
        duty2 = 50;   // to stop the motor
@@ -122,5 +118,6 @@ void loop() {
        analogWrite(pinIN2, duty2);
   }
 }
+Serial.flush();
 noInterrupts();    // stop interrupts
 }

@@ -1,5 +1,5 @@
 {
-    "sketch": "MEM458_Lab3_Motor_Velocity.ino",
+    "sketch": "Lab4SketchMod.ino",
     "board": "arduino:avr:uno",
     "port": "COM4",
     "programmer": "arduino:avrispmkii"
