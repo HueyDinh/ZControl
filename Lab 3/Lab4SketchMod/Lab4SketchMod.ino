@@ -83,7 +83,7 @@ void loop() {
 {
 // Generate PWM on pinX to control motor speed
   if (InrptTime <= 3000) {     //CCW rotation for 3 second
-    duty1 = 63;
+    duty1 = 64;
     duty2 = 37;
   } else {   //CW rotation for 4 seconds
     duty1 = 31;
