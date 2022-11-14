@@ -1,0 +1,6 @@
+Run the simulink twice for both sets of graphs
+w_ss value from step 1: 6.05
+
+K=.55 figures
+
+K=1 figures
