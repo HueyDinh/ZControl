@@ -1,33 +1,21 @@
 clc;clear;close all;
 % ReadTxt_MEM458_Lab3_Motor_Velocity.m
-fileID = fopen('lab4modData.txt','r');
-formatSpec = '%d %d %f';
-sizeA = [3 Inf];
+fileID = fopen('lab4dataExp.txt','r');
+formatSpec = '%ld %d';
+sizeA = [2 Inf];
 A = fscanf(fileID,formatSpec,sizeA);
 fclose(fileID);
 n=size(A);
-t=A(1,1:n(2));
+t=A(1,1:n(2))*64/16e6;
 x=A(2,1:n(2));
-v=A(3,1:n(2));
-v_old = v;
-v(2)=(v(1)+v(2))/2;
-v(3)=(v(2)*2+v(3))/3;
-v(4)=(v(3)*3+v(4))/4;
-v(5)=(v(4)*4+v(5))/5;
-v(6)=(v(5)*5+v(6))/6;
-v(7)=(v(6)*6+v(7))/7;
-v(8)=(v(7)*7+v(8))/8;
-v(9)=(v(9)*8+v(9))/9;
-
-for i=10:1:n(2)
-    v(i)=(v(i-1)*9+v(i))/10;
-end
-
-countToRPMConv = 0.892/360*60*1000;
+v = zeros(length(t),1);
+v(2:end) = diff(x)./diff(t);
+v_smooth = movmean(v,20);
+countToRPMConv = 0.892/360*60;
 countToRadConv = 0.892*pi/180;
 
 figure;
-plot(t/1000,x,'r-')
+plot(t,x,'r-')
 title('counts(red) vs. time, sec')
 xlabel("Time (s)")
 ylabel("Encoder Count");
@@ -35,7 +23,7 @@ grid on;
 grid minor;
 
 figure;
-plot(t(1:100)/1000,x(1:100),'r-')
+plot(t(1:100),x(1:100),'r-')
 title('counts(red) vs. time, sec - Zoomed')
 xlabel("Time (s)")
 ylabel("Encoder Count");
@@ -43,7 +31,7 @@ grid on;
 grid minor;
 
 figure;
-plot(t/1000,x*countToRadConv,'r-')
+plot(t,x*countToRadConv,'r-')
 title('Angular displacement (red) vs. time, sec')
 xlabel("Time (s)")
 ylabel("\theta (rad)");
@@ -51,7 +39,7 @@ grid on;
 grid minor;
 
 figure;
-plot(t/1000,v_old,'b-')
+plot(t,v,'b-')
 title('counts/time(blue) vs. time, sec')
 xlabel("Time (s)")
 ylabel("Encoder Count Rate of Change (\mu s^{-1})");
@@ -59,7 +47,7 @@ grid on;
 grid minor;
 
 figure;
-plot(t/1000,v,'m-')
+plot(t,v_smooth,'m-')
 title('counts/time(purple) vs. time, sec - Post-Processed')
 xlabel("Time (s)")
 ylabel("Encoder Count Rate of Change (\mu s^{-1})");
@@ -67,7 +55,7 @@ grid on;
 grid minor;
 
 figure;
-plot(t/1000,v*countToRPMConv,'m-')
+plot(t,v_smooth*countToRPMConv,'m-')
 title('Angular velocity (purple) vs. time, sec - Post-Processed')
 xlabel("Time (s)")
 ylabel("\omega (RPM)");
