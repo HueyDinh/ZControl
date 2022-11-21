@@ -1,0 +1,6 @@
+{
+    "sketch": "MEM458_Lab4_RT_PosFk.ino",
+    "board": "arduino:avr:uno",
+    "programmer": "arduino:avrispmkii",
+    "port": "COM4"
+}
