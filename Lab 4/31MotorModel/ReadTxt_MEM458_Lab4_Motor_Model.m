@@ -24,44 +24,45 @@ for i=10:1:n(2)
 end
 
 % 1073 counts  is equivalent to   922 degrees
-x=x*922/1073; % convert counts to degrees
-v=v*922/1073;  % convert counts to degrees
-v_old=v_old*922/1073;  % convert counts to degrees
+x=x*0.892; % convert counts to degrees
+v=v*0.892;  % convert counts to degrees
+v_old=v_old*0.892;  % convert counts to degrees
 figure(4)
 plot(t,x,'r-')
-title('Fig.4: displacement, deg (red) vs. time, sec')
+title('Angular displacement, deg (red) vs. Time, sec')
 grid on;
 grid minor;
 figure(5)
 plot(t(1:100),x(1:100),'r-')
-title('Fig.5: displacement, deg (red) vs. time, sec')
+title('Angular displacement, deg (red) vs. Time, sec - Zoomed')
 grid on;
 grid minor;
 figure(6)
 plot(t,v_old,'b-')
-title('Fig.6: velocity, deg/sec(blue) vs. time, sec')
+title('Angular velocity, deg/sec(blue) vs. Time, sec')
 grid on;
 grid minor;
 
 figure(7)
 plot(t,v,'m-')
-title('Fig.7: velocity, deg/sec(purple) vs. time, sec')
+title('Angular velocity, deg/sec(purple) vs. Time, sec - Smoothed')
 grid on;
 grid minor;
 
 figure(8)
-plot(t(1:200),v(1:200),'m-')
-title('Fig.8: velocity, deg/sec(purple) vs. time, sec')
+plot(t(1:200),v(1:200),'m-',"DisplayName","Hardware Response")
+title('Angular velocity, deg/sec(purple) vs. Time, sec - Smoothed & Zoomed')
 grid on;
 grid minor;
 hold on;
 
-w_ss = 242;
+w_ss = 250;
 figure(8)
 t2=linspace(0,0.79,100);
 % typical dynamis model to match the experimenal data
 v2=w_ss*(1-exp(-t2/0.08)); 
-plot(t2,v2,'b-')
+plot(t2,v2,'b-',"DisplayName", "Exponential Curvefit with \tau = 0.08 and \omega_{ss} = 250 degree/s")
 grid on;
 grid minor;
+legend(Location="best")
 

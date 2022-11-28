@@ -18,8 +18,8 @@
               INITIALIZATION
 **********************************************/
 // Use pinIN1 & pinIN2 as PWM outputs to control the motion of the motor
-const int pinIN1 = 9;  // for PWM output to IN1 of L298N
-const int pinIN2 = 10;  // for PWM output to IN2 of L298N
+const int pinIN1 = 5;  // for PWM output to IN1 of L298N
+const int pinIN2 = 6;  // for PWM output to IN2 of L298N
 
 // Use pinA as the interrupt pin dictated by Encoder Channel A
 const int pinA = 2;  // Yellow wire(Channel A) 
@@ -40,7 +40,7 @@ float Ts=0.01;   // sampling period = 10 ms
 float err=0, mk=0, xk=0;
 //float kp=0.55;
 //float kp=0.4;
-float kp=1;
+float kp=0.55;
 
 float ref_deg=0;
 
@@ -125,9 +125,9 @@ void loop() {
    err = ref_deg - deg;
 
 // proportional control
-   mk= kp*err; 
+   mk= kp*err;
   if (abs(mk) < 15)       // to address the dead-zone issue
-   {mk=3*kp*err;}
+   {mk *= 3;}
    
    if(mk>100)
    {mk=100;}

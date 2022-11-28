@@ -18,8 +18,8 @@ MEM458 Lab4, Drexel University 11/07/2020
               INITIALIZATION
 **********************************************/
 // Use pinIN1 & pinIN2 as PWM outputs to control the motion of the motor
-const int pinIN1 = 9;  // for PWM output to IN1 of L298N
-const int pinIN2 = 10;  // for PWM output to IN2 of L298N
+const int pinIN1 = 5;  // for PWM output to IN1 of L298N
+const int pinIN2 = 6;  // for PWM output to IN2 of L298N
 
 // Use pinA as the interrupt pin dictated by Encoder Channel A
 const int pinA = 2;  // Yellow wire(Channel A) 
